@@ -5,6 +5,6 @@ RUN			apt-get update && apt-get install -y nginx openssl
 COPY		./default.conf /
 COPY		./entrypoint.sh /
 
-# EXPOSE		80
+# EXPOSE		443
 
 ENTRYPOINT	["/entrypoint.sh"]
