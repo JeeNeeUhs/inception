@@ -15,4 +15,6 @@ RUN			mv wordpress /var/www/html
 
 COPY		./entrypoint.sh /
 
+EXPOSE		9000
+
 ENTRYPOINT	["/entrypoint.sh"]
