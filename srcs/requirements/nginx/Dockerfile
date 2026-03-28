@@ -1,6 +1,7 @@
 FROM		debian:bookworm
 
-RUN			apt-get update && apt-get install -y nginx openssl
+RUN			apt-get update && apt-get install -y nginx openssl \
+			&& rm -rf /var/lib/apt/lists/*
 
 COPY		./default.conf /
 COPY		./entrypoint.sh /
