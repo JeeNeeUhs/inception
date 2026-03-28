@@ -1,0 +1,72 @@
+services:
+
+  mariadb:
+    build: ./requirements/mariadb
+    container_name: mariadb
+    restart: on-failure
+    environment:
+      - .env
+    secrets: #delete unused
+      - DB_ADMIN_PASSWORD
+      - DB_PASSWORD
+      - DB_ROOT_PASSWORD
+      - WP_ADMIN_PASSWORD
+      - WP_PASSWORD
+    networks:
+      - inception
+    healthcheck:
+      test: ["CMD", "test", "-f", "/.done"]
+      interval: 1s
+      timeout: 1s
+      retries: 100
+      start_period: 1s
+
+  wordpress:
+    build: ./requirements/wordpress
+    container_name: wordpress
+    restart: on-failure
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    environment:
+      - .env
+    secrets: # delete unused 
+      - DB_ADMIN_PASSWORD
+      - DB_PASSWORD
+      - DB_ROOT_PASSWORD
+      - WP_ADMIN_PASSWORD
+      - WP_PASSWORD
+    networks:
+      - inception
+  
+  nginx:
+    build: ./requirements/nginx
+    container_name: nginx
+    restart: on-failure
+    depends_on:
+      - wordpress
+    environment:
+      - .env
+    secrets: #delete
+      - DB_ADMIN_PASSWORD
+      - DB_PASSWORD
+      - DB_ROOT_PASSWORD
+      - WP_ADMIN_PASSWORD
+      - WP_PASSWORD
+    networks:
+      - inception
+
+networks:
+  inception:
+
+secrets:
+  DB_ADMIN_PASSWORD:
+    file: ./secrets/DB_ADMIN_PASSWORD.txt
+  DB_PASSWORD:
+    file: ./secrets/DB_PASSWORD.txt
+  DB_ROOT_PASSWORD:
+    file: ./secrets/DB_ROOT_PASSWORD.txt
+  WP_ADMIN_PASSWORD:
+    file: ./secrets/WP_ADMIN_PASSWORD.txt
+  WP_PASSWORD:
+    file: ./secrets/WP_PASSWORD.txt
