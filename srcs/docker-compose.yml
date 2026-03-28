@@ -4,7 +4,7 @@ services:
     build: ./requirements/mariadb
     container_name: mariadb
     restart: on-failure
-    environment:
+    env_file:
       - .env
     secrets: #delete unused
       - DB_ADMIN_PASSWORD
@@ -18,7 +18,7 @@ services:
       test: ["CMD", "test", "-f", "/.done"]
       interval: 1s
       timeout: 1s
-      retries: 100
+      retries: 1000
       start_period: 1s
     volumes:
       - /home/ahekinci/data/mariadb:/var/lib/mysql
@@ -30,7 +30,7 @@ services:
     depends_on:
       mariadb:
         condition: service_healthy
-    environment:
+    env_file:
       - .env
     secrets: # delete unused 
       - DB_ADMIN_PASSWORD
@@ -49,7 +49,7 @@ services:
     restart: on-failure
     depends_on:
       - wordpress
-    environment:
+    env_file:
       - .env
     secrets: #delete
       - DB_ADMIN_PASSWORD

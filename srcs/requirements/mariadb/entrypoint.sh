@@ -1,8 +1,8 @@
 #!/bin/bash
 
-DB_PASSWORD=$(cat /run/secrets/DB_PASSWORD) || {echo "Error: DB_PASSWORD secret not found"; exit 1;}
-DB_ADMIN_PASSWORD=$(cat /run/secrets/DB_ADMIN_PASSWORD) || {echo "Error: DB_ADMIN_PASSWORD secret not found"; exit 1;}
-DB_ROOT_PASSWORD=$(cat /run/secrets/DB_ROOT_PASSWORD) || {echo "Error: DB_ROOT_PASSWORD secret not found"; exit 1;}
+DB_PASSWORD=$(cat /run/secrets/DB_PASSWORD) || { echo "Error: DB_PASSWORD secret not found"; exit 1; }
+DB_ADMIN_PASSWORD=$(cat /run/secrets/DB_ADMIN_PASSWORD) || { echo "Error: DB_ADMIN_PASSWORD secret not found"; exit 1; }
+DB_ROOT_PASSWORD=$(cat /run/secrets/DB_ROOT_PASSWORD) || { echo "Error: DB_ROOT_PASSWORD secret not found" ; exit 1; }
 
 sed -i 's/127.0.0.1/0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
 
@@ -27,5 +27,7 @@ mysqladmin -u root -p"$DB_ROOT_PASSWORD" shutdown
 wait $PID
 
 touch /.done
+
+echo "MariaDB initialization complete."
 
 exec mysqld_safe

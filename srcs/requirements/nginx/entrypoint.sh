@@ -9,4 +9,5 @@ openssl req \
 	-out /ssl/nginx.crt \
 	-subj "/C=TR/ST=Turkey/L=Kocaeli/O=42/OU=ahekinci/CN=$DOMAIN_NAME"
 
+echo "nginx complated"
 exec nginx -g "daemon off;"

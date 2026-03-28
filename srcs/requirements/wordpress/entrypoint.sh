@@ -1,8 +1,8 @@
 #!/bin/bash
 
-DB_PASSWORD=$(cat /run/secrets/DB_PASSWORD) || {echo "Error: DB_PASSWORD secret not found"; exit 1;}
-WP_PASSWORD=$(cat /run/secrets/WP_PASSWORD) || {echo "Error: WP_PASSWORD secret not found"; exit 1;}
-WP_ADMIN_PASSWORD=$(cat /run/secrets/WP_ADMIN_PASSWORD) || {echo "Error: WP_ADMIN_PASSWORD secret not found"; exit 1;}
+DB_PASSWORD=$(cat /run/secrets/DB_PASSWORD) || { echo "Error: DB_PASSWORD secret not found"; exit 1; }
+WP_PASSWORD=$(cat /run/secrets/WP_PASSWORD) || { echo "Error: WP_PASSWORD secret not found"; exit 1; }
+WP_ADMIN_PASSWORD=$(cat /run/secrets/WP_ADMIN_PASSWORD) || { echo "Error: WP_ADMIN_PASSWORD secret not found"; exit 1; }
 
 wp config create \
 	--allow-root \
@@ -29,5 +29,7 @@ wp user create \
 	"${WP_USER_EMAIL}" \
 	--user_pass="${WP_PASSWORD}" \
 	--role=author
+
+echo "WordPress installation complete."
 
 exec php-fpm -F
