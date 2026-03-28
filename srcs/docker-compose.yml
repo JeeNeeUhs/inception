@@ -65,12 +65,12 @@ networks:
 
 secrets:
   DB_ADMIN_PASSWORD:
-    file: ./secrets/DB_ADMIN_PASSWORD.txt
+    file: ./secrets/db_admin_password.txt
   DB_PASSWORD:
-    file: ./secrets/DB_PASSWORD.txt
+    file: ./secrets/db_password.txt
   DB_ROOT_PASSWORD:
-    file: ./secrets/DB_ROOT_PASSWORD.txt
+    file: ./secrets/db_root_password.txt
   WP_ADMIN_PASSWORD:
-    file: ./secrets/WP_ADMIN_PASSWORD.txt
+    file: ./secrets/wp_admin_password.txt
   WP_PASSWORD:
-    file: ./secrets/WP_PASSWORD.txt
+    file: ./secrets/wp_password.txt
