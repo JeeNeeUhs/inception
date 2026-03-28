@@ -1,8 +1,10 @@
 FROM		debian:bookworm
 
-RUN			sudo apt-get update && sudo apt-get install -y mariadb-server
+RUN			apt-get update && apt-get install -y mariadb-server \
+			&& rm -rf /var/lib/apt/lists/*
 
 COPY		./entrypoint.sh /
+RUN			chmod +x /entrypoint.sh
 
 # EXPOSE		3306
 
