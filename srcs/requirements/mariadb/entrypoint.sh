@@ -8,7 +8,7 @@ sed -i 's/127.0.0.1/0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
 
 mysqld_safe --skip-networking &
 PID=$!
-
+echo "Waiting for MariaDB to start..."
 until mysqladmin ping --silent; do
 	sleep 1
 done
