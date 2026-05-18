@@ -6,6 +6,6 @@ RUN			apt-get update && apt-get install -y mariadb-server \
 COPY		./entrypoint.sh /
 RUN			chmod +x /entrypoint.sh
 
-# EXPOSE		3306
+EXPOSE		3306
 
 ENTRYPOINT	["/entrypoint.sh"]
