@@ -6,12 +6,9 @@ services:
     restart: on-failure
     env_file:
       - .env
-    secrets: #delete unused
-      - DB_ADMIN_PASSWORD
+    secrets:
       - DB_PASSWORD
       - DB_ROOT_PASSWORD
-      - WP_ADMIN_PASSWORD
-      - WP_PASSWORD
     networks:
       - inception
     healthcheck:
@@ -32,10 +29,8 @@ services:
         condition: service_healthy
     env_file:
       - .env
-    secrets: # delete unused 
-      - DB_ADMIN_PASSWORD
+    secrets:
       - DB_PASSWORD
-      - DB_ROOT_PASSWORD
       - WP_ADMIN_PASSWORD
       - WP_PASSWORD
     networks:
@@ -51,21 +46,15 @@ services:
       - wordpress
     env_file:
       - .env
-    secrets: #delete
-      - DB_ADMIN_PASSWORD
-      - DB_PASSWORD
-      - DB_ROOT_PASSWORD
-      - WP_ADMIN_PASSWORD
-      - WP_PASSWORD
     networks:
       - inception
+    ports:
+      - "443:443"
 
 networks:
   inception:
 
 secrets:
-  DB_ADMIN_PASSWORD:
-    file: ../secrets/db_admin_password.txt
   DB_PASSWORD:
     file: ../secrets/db_password.txt
   DB_ROOT_PASSWORD:
