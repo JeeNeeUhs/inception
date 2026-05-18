@@ -6,7 +6,7 @@ RUN			apt-get update && apt-get install -y \
 			php \
 			php-cli \
 			php-mysql \
-			php-fpm \
+			php-fpm8.2 \
 			&& rm -rf /var/lib/apt/lists/*
 
 RUN			chown -R www-data:www-data /var/www/html

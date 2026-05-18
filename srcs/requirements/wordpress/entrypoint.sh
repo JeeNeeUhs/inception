@@ -37,4 +37,4 @@ fi
 
 echo "WordPress installation complete."
 
-exec php-fpm -F
+exec php-fpm8.2 -F
