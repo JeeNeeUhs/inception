@@ -1,5 +1,7 @@
 #!/bin/bash
 
+mkdir -p /ssl
+
 openssl req \
 	-x509 \
 	-nodes \
@@ -7,7 +9,7 @@ openssl req \
 	-newkey rsa:2048 \
 	-keyout /ssl/nginx.key \
 	-out /ssl/nginx.crt \
-	-subj "/C=TR/ST=Turkey/L=Kocaeli/O=42/OU=ahekinci/CN=$DOMAIN_NAME"
+	-subj "/C=TR/ST=Turkey/L=Kocaeli/O=42/OU=ahekinci/CN=${DOMAIN_NAME}"
 
 echo "nginx complated"
 exec nginx -g "daemon off;"
