@@ -4,7 +4,11 @@ DB_PASSWORD=$(cat /run/secrets/DB_PASSWORD) || { echo "Error: DB_PASSWORD secret
 WP_PASSWORD=$(cat /run/secrets/WP_PASSWORD) || { echo "Error: WP_PASSWORD secret not found"; exit 1; }
 WP_ADMIN_PASSWORD=$(cat /run/secrets/WP_ADMIN_PASSWORD) || { echo "Error: WP_ADMIN_PASSWORD secret not found"; exit 1; }
 
-if [ ! -f "wp-config.php" ]; then
+chown -R www-data:www-data /var/www/html
+
+sed -i 's|listen = /run/php/php8.2-fpm.sock|listen = 9000|g' /etc/php/8.2/fpm/pool.d/www.conf
+
+if [ ! -f "/var/www/html/wordpress/wp-config.php" ]; then
 	wp core download --path=/var/www/html/wordpress --allow-root
 
 	wp config create \
