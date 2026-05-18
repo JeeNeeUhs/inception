@@ -1,13 +1,10 @@
 FROM		debian:bookworm
 
-RUN			apt-get update && apt-get install -y \
-			curl \
-			tar \
-			php \
-			php-cli \
-			php-mysql \
-			php-fpm8.2 \
-			&& rm -rf /var/lib/apt/lists/*
+RUN		apt-get update && \
+		apt-get install -y --no-install-recommends curl ca-certificates \
+		php8.2-fpm php8.2-mysql mariadb-client && \
+		apt-get clean && \
+		rm -rf /var/lib/apt/lists/*
 
 RUN			chown -R www-data:www-data /var/www/html
 
